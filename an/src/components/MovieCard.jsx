@@ -16,7 +16,7 @@ const MovieCard = ({ movie }) => {
         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
         className="aspect-2/3"
       />
-      <p className="font-bold">{movie.title}</p>
+      <p className="h-full font-bold">{movie.original_title}</p>
       <p className="flex justify-end">⭐{movie.vote_average}</p>
     </div>
   );

@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
+import NavBar from "./NavBar";
 
 const Layout = () => {
   return (
     <div>
-      <header className="bg-black text-white text-center p-4 text-2xl">
-        MOVIE
+      <header>
+        <NavBar />
       </header>
       <main>
         <Outlet />
