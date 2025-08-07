@@ -16,7 +16,7 @@ const MovieCard = ({movie}) => {
       <img
         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
         alt={movie.title}
-        className="w-full h-[200px] object-cover"
+        className="w-full object-cover"
       />
       <h2 className="text-sm font-semibold text-gray-800">{movie.title}</h2>
       <p className="text-xs text-gray-600 text-right ">
