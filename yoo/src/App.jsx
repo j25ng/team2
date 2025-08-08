@@ -6,12 +6,14 @@ import axios from "axios";
 import NavBar from "./components/NavBar";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import SearchMovie from "./components/SearchMovie";
 
 function App() {
   const [movieList, setMovieList] = useState([]);
-  const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
   useEffect(() => {
+    const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
     const fetchPopularMovies = async () => {
       try {
         const res = await axios.get(
@@ -55,7 +57,6 @@ function App() {
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      
     </Routes>
   );
 }
