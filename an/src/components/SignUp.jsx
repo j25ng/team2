@@ -16,6 +16,7 @@ const SignUp = () => {
             <div className="flex items-center h-12 gap-2 text-xl p-2 border-b">
               <MdPermIdentity className="text-2xl" />
               <input
+                id="id"
                 type="text"
                 placeholder="ID"
                 className="py-2 focus:outline-none font-bold text-xl"
@@ -24,6 +25,7 @@ const SignUp = () => {
             <div className="flex items-center h-12 gap-2 text-xl p-2 border-b">
               <MdPassword className="text-2xl" />
               <input
+                id="pwd"
                 type="password"
                 placeholder="Password"
                 className="py-2 focus:outline-none font-bold text-xl"
@@ -32,6 +34,7 @@ const SignUp = () => {
             <div className="flex items-center h-12 gap-2 text-xl p-2 border-b">
               <MdPassword className="text-2xl" />
               <input
+                id="confirm_pwd"
                 type="password"
                 placeholder="Confirm Password"
                 className="py-2 focus:outline-none font-bold text-xl"
@@ -40,6 +43,7 @@ const SignUp = () => {
             <div className="flex items-center h-12 gap-2 text-xl p-2">
               <MdAlternateEmail className="text-2xl" />
               <input
+                id="email"
                 type="text"
                 placeholder="Email"
                 className="py-2 focus:outline-none font-bold text-xl"
@@ -50,6 +54,7 @@ const SignUp = () => {
             <div className="flex items-center h-12 gap-2 text-xl p-2 border-b">
               <MdPermIdentity className="text-2xl" />
               <input
+                id="name"
                 type="text"
                 placeholder="Name"
                 className="py-2 focus:outline-none font-bold text-xl"
@@ -58,6 +63,7 @@ const SignUp = () => {
             <div className="flex items-center h-12 gap-2 text-xl p-2">
               <MdDateRange className="text-2xl" />
               <input
+                id="birth"
                 type="date"
                 placeholder=""
                 className="py-2 focus:outline-none font-bold text-xl"

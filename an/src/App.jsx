@@ -1,20 +1,25 @@
-// import movieData from "./data/movieListData";
 import MovieCard from "./components/MovieCard";
 import { getMovieList } from "./api/tmdb";
 import { useEffect, useState } from "react";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import Loading from "./components/Loading";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
+      setIsLoading(true);
+
       try {
         const data = await getMovieList(page);
         setMovies(data.results);
       } catch (err) {
         console.log(err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -27,6 +32,14 @@ function App() {
     }
   };
 
+  if (isLoading || !movies) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center gap-3 p-5">
       <div className="grid grid-cols-4 w-6xl">
@@ -34,7 +47,6 @@ function App() {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
-      <div></div>
 
       <div className="flex gap-5 mt-4 p-2 h-12 rounded bg-gray-300 m-2">
         <button

@@ -2,7 +2,7 @@
 import { useParams } from "react-router-dom";
 import { getMovieDetail } from "../api/tmdb";
 import { useEffect, useState } from "react";
-import Spinner from "./Spinner";
+import Loading from "./Loading";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -15,7 +15,6 @@ const MovieDetail = () => {
 
       try {
         const data = await getMovieDetail(id);
-        console.log(data);
         setDetailData(data);
       } catch (err) {
         console.log(err);
@@ -30,7 +29,7 @@ const MovieDetail = () => {
   if (isLoading || !detailData) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <Spinner />
+        <Loading />
       </div>
     );
   }

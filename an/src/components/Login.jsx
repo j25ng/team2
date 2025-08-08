@@ -11,6 +11,7 @@ const Login = () => {
             <div className="flex items-center h-12 border-b gap-2 text-xl p-2">
               <MdPermIdentity className="text-2xl" />
               <input
+                id="id"
                 type="text"
                 placeholder="ID"
                 className="py-2 focus:outline-none font-bold text-xl"
@@ -19,6 +20,7 @@ const Login = () => {
             <div className="flex items-center h-12 gap-2 text-xl p-2 ">
               <MdPassword className="text-2xl" />
               <input
+                id="password"
                 type="password"
                 placeholder="Password"
                 className="py-2 focus:outline-none font-bold text-xl"

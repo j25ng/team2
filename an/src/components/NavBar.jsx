@@ -1,10 +1,15 @@
-import { SiThemoviedatabase } from "react-icons/si";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { SiThemoviedatabase } from "react-icons/si";
+import { FaSearch } from "react-icons/fa";
+import useDebounce from "../hooks/useDebounce";
 const NavBar = () => {
+  const [searchInput, setSearchInput] = useState("");
+  const debouncedSearchInput = useDebounce(searchInput);
   const navigate = useNavigate();
 
   const home = () => {
+    setSearchInput("");
     navigate("/");
   };
 
@@ -16,6 +21,13 @@ const NavBar = () => {
     navigate("/login");
   };
 
+  useEffect(() => {
+    if (debouncedSearchInput.trim()) {
+      navigate(`/search?query=${encodeURIComponent(debouncedSearchInput)}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchInput]);
+
   return (
     <>
       <div className="flex justify-between items-center h-30 p-4 bg-black">
@@ -25,6 +37,7 @@ const NavBar = () => {
             onClick={home}
           />
         </div>
+
         <div className="flex flex-col text-white w-20 gap-2">
           <button
             className="rounded p-2 bg-gray-500 hover:bg-gray-400"
@@ -39,6 +52,19 @@ const NavBar = () => {
             로그인
           </button>
         </div>
+      </div>
+      <div className="flex justify-end border-2">
+        <input
+          id="search"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          type="text"
+          className="flex-grow text-right m-1 focus:outline-none"
+          placeholder="Search..."
+        />
+        <button className="flex-shrink-0 m-3 text-2xl">
+          <FaSearch />
+        </button>
       </div>
     </>
   );

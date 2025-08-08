@@ -25,3 +25,19 @@ export const getMovieDetail = async (movieId) => {
     throw error;
   }
 };
+
+export const searchMovies = async (query, page = 1) => {
+  try {
+    const response = await axiosInstance.get("/search/movie", {
+      params: {
+        query,
+        page,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("TMDB API Error:", error);
+    throw error;
+  }
+};

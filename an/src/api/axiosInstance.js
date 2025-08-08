@@ -5,6 +5,7 @@ const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const axiosInstance = axios.create({
   baseURL: "https://api.themoviedb.org/3",
   params: {
+    include_adult: "false",
     language: "ko-KR",
   },
   headers: {
