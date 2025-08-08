@@ -9,7 +9,7 @@ const SearchCard = ({ movie }) => {
 
   return (
     <div
-      className="flex border border-gray-300 p-2 m-2 gap-5 transition hover:scale-105 hover:bg-gray-100"
+      className="flex border border-gray-300 p-4 gap-5 transition hover:scale-101 hover:bg-gray-100"
       onClick={handleClick}
     >
       <img

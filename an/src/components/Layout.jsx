@@ -10,6 +10,9 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
+      <footer>
+        <div className="flex h-20 w-full bg-black" />
+      </footer>
     </div>
   );
 };
