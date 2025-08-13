@@ -1,32 +1,59 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SiThemoviedatabase } from "react-icons/si";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaUserCircle } from "react-icons/fa";
 import useDebounce from "../hooks/useDebounce";
+import { useAuth } from "../context/AuthContext";
+import Loading from "./Loading";
+
 const NavBar = () => {
+  const { user, logout, loading } = useAuth();
+  const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
   const debouncedSearchInput = useDebounce(searchInput);
-  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const home = () => {
     setSearchInput("");
     navigate("/");
   };
 
-  const signUp = () => {
-    navigate("/signup");
-  };
+  const signup = () => navigate("/signup");
+  const login = () => navigate("/login");
+  const mylist = () => navigate("/mylist");
 
-  const login = () => {
-    navigate("/login");
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
   };
 
   useEffect(() => {
     if (debouncedSearchInput.trim()) {
       navigate(`/search?query=${encodeURIComponent(debouncedSearchInput)}`);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchInput]);
+  }, [debouncedSearchInput, navigate]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -37,21 +64,51 @@ const NavBar = () => {
             onClick={home}
           />
         </div>
-
-        <div className="flex flex-col text-white w-20 gap-2">
-          <button
-            className="rounded p-2 bg-gray-500 hover:bg-gray-400"
-            onClick={signUp}
+        {!user ? (
+          <div className="flex flex-col text-white w-20 gap-2">
+            <button
+              className="rounded p-2 bg-gray-500 hover:bg-gray-400"
+              onClick={signup}
+            >
+              SignUp
+            </button>
+            <button
+              className="rounded p-2 bg-gray-500 hover:bg-gray-400"
+              onClick={login}
+            >
+              Login
+            </button>
+          </div>
+        ) : (
+          <div
+            className="relative flex flex-col items-center justify-center text-white w-20 gap-2"
+            ref={menuRef}
           >
-            회원가입
-          </button>
-          <button
-            className="rounded p-2 bg-gray-500 hover:bg-gray-400"
-            onClick={login}
-          >
-            로그인
-          </button>
-        </div>
+            <FaUserCircle className="text-5xl" onClick={toggleMenu} />
+            {menuOpen && (
+              <div className="absolute top-full mt-2 flex flex-col gap-2 bg-gray-800 rounded p-2 shadow-lg right-0 z-10">
+                <button
+                  className="rounded p-2 bg-gray-500 hover:bg-gray-400"
+                  onClick={() => {
+                    mylist();
+                    setMenuOpen(false);
+                  }}
+                >
+                  Bookmarks
+                </button>
+                <button
+                  className="rounded p-2 bg-gray-500 hover:bg-gray-400"
+                  onClick={() => {
+                    logout();
+                    setMenuOpen(false);
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <div className="flex justify-end border-2">
         <input

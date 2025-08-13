@@ -26,7 +26,7 @@ const Search = () => {
   return (
     <div className="p-5">
       {searchData?.length ? (
-        <div>
+        <div className="flex flex-col gap-2">
           {searchData.map((movie) => (
             <SearchCard key={movie.id} movie={movie} />
           ))}

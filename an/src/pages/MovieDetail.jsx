@@ -2,7 +2,7 @@
 import { useParams } from "react-router-dom";
 import { getMovieDetail } from "../api/tmdb";
 import { useEffect, useState } from "react";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 
 const MovieDetail = () => {
   const { id } = useParams();

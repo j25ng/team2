@@ -3,11 +3,11 @@ import NavBar from "./NavBar";
 
 const Layout = () => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <header>
         <NavBar />
       </header>
-      <main>
+      <main className="flex-grow">
         <Outlet />
       </main>
       <footer>
