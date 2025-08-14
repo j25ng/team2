@@ -31,7 +31,8 @@ const NavBar = () => {
     if (debouncedSearchInput.trim()) {
       navigate(`/search?query=${encodeURIComponent(debouncedSearchInput)}`);
     }
-  }, [debouncedSearchInput, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchInput]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
