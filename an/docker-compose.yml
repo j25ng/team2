@@ -16,5 +16,22 @@ services:
       - mysql_data:/var/lib/mysql
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
+  express:
+    build: ./server # Express 코드 있는 폴더 (Dockerfile 위치)
+    container_name: express-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USER: mvadmin
+      DB_PASSWORD: "1234"
+      DB_NAME: mvdb
+    volumes:
+      - ./server:/app # 코드 실시간 반영 (개발용)
+      - /app/node_modules # 컨테이너 내부 node_modules 유지
+
 volumes:
   mysql_data:
